@@ -15,12 +15,14 @@ const winURL = process.env.NODE_ENV === 'development'
 
 function createWindow () {
   /**
-   * Initial window options
+   * 初始化窗口参数
    */
   mainWindow = new BrowserWindow({
-    height: 563,
+    width: 1440,
+    height: 900,
     useContentSize: true,
-    width: 1000
+    frame: true,//有无边框
+    resizable: false,//禁止窗口缩放
   })
 
   mainWindow.loadURL(winURL)
