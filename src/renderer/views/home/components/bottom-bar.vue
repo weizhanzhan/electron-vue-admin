@@ -4,15 +4,15 @@
         <ul>
             <li>
                 <span>Data</span>
-                <a href="javascript:;"><img src="../../../../../static/images/menu/index.png"></a>
+                <a href="javascript:;" class="hvr-bob"><img src="../../../../../static/images/menu/index.png"></a>
             </li>
             <li>
                 <span>Index</span>
-                <a href="javascript:;"><img src="../../../../../static/images/menu/data.png"></a>
+                <a href="javascript:;" class="hvr-bob"><img src="../../../../../static/images/menu/data.png"></a>
             </li>
             <li >
                 <span>Setting</span>
-                <a href="javascript:;"><img src="../../../../../static/images/menu/set.png"></a>
+                <a href="javascript:;" class="hvr-bob"><img src="../../../../../static/images/menu/set.png"></a>
             </li>
         </ul>
     </div>
@@ -36,7 +36,6 @@
 </script>
 
 <style scoped lang="scss">
-
     #container{
         position: fixed;
         bottom: 0;
@@ -72,8 +71,8 @@
             span{
                 display: none;
                 position: absolute;
-                bottom: 70px;
-                left: 10px;
+                bottom: 60px;
+                left: 5px;
                 width: 100%;
                 background-color: #222;
                 padding: 4px 0;
@@ -81,10 +80,10 @@
             }
         }
         li:hover{
-            img {
-               transform: scale(1.1);
+            // img {
+            //    transform: scale(1.1);
               
-            }
+            // }
             span {
                 display: block;
                 color: #fff;
