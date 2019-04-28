@@ -12,4 +12,8 @@
 
 <style>
   /* CSS */
+  html { 
+    overflow-x: hidden;
+    overflow-y: auto; 
+  }
 </style>

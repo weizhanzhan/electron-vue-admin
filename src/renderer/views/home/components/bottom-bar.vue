@@ -1,5 +1,5 @@
 <template>
-<div id="container">
+<div id="container" >
     <div id="dock">
         <ul>
             <li>
@@ -59,7 +59,7 @@
             list-style-type: none;
             position: relative;
             width: 100px;
-            font-size: 20px;
+            font-size: 16px;
           
             img{
                 width: 50px;
@@ -74,9 +74,9 @@
                 bottom: 60px;
                 left: 5px;
                 width: 100%;
-                background-color: #222;
-                padding: 4px 0;
-                border-radius: 7px;
+                background-color:rgba(255, 255, 255, .2);
+                padding: 2px 0;
+                border-radius: 4px;
             }
         }
         li:hover{
