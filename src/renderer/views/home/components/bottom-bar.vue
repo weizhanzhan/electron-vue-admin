@@ -1,5 +1,5 @@
 <template>
-<div id="container" >
+<div id="container" @contextmenu="contextmenu">
     <div id="dock">
         <ul>
             <li>
@@ -29,7 +29,9 @@
             }
         },
         methods: {
-          
+          contextmenu(e){
+            e.cancelBubble = true
+          }
         },
       
     }
@@ -37,8 +39,7 @@
 
 <style scoped lang="scss">
     #container{
-        position: fixed;
-        bottom: 0;
+     
         text-align: center;
         width: 100%;
         #dock {
@@ -47,11 +48,10 @@
             margin: 0 auto;
         }
         ul {
-            min-width: 50%;
-            width: 50%;
+          
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px 10px 0 0;
+           
             display: flex;
             justify-content: center;
         }

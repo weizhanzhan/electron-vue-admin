@@ -1,9 +1,13 @@
 <template>
-    <div class="home" ref="home" @click.self="test($event,'left')" @contextmenu="test($event,'right')">
+    <div class="home" ref="home" @click="contextmenu($event,'left')" @contextmenu="contextmenu($event,'right')">
         <ContextMenu ref="contextMenu"/>
-       <div class="bottom">
-           <BottomBar/>
-       </div>
+        <div class="top"></div>
+        <div class="content">
+            <Desktop/>
+        </div>
+        <div class="bottom">
+            <BottomBar/>
+        </div>
     </div>
 </template>
 
@@ -11,46 +15,37 @@
 import Vue from 'vue'
 import BottomBar from './components/bottom-bar'
 import ContextMenu from '../../components/context_menu'
+import Desktop  from './components/desktop'
 export default {
-    components:{BottomBar, ContextMenu},
+    components:{BottomBar, ContextMenu, Desktop},
     data () {
         return {
         }
     },
     methods:{
-        test(e,type){
+        contextmenu(e,type){
+            let screenX = document.body.clientWidth-e.clientX
+            let screenY = document.body.clientHeight-e.clientY
+      
             let menu = this.$refs.contextMenu
-            console.log('test',e)
             if(type=='right'){
-                menu.open(e.clientX,e.clientY)
+           
+                if(screenX<100&&screenY<190){
+                    menu.open(document.body.clientWidth-100,e.clientY-90)
+                }else if(screenX>100&&screenY<190){
+                    menu.open(e.clientX,e.clientY-90)
+                }else if(screenX<100&&screenY>190){
+                    menu.open(document.body.clientWidth-100,e.clientY)
+                }else{
+                    menu.open(e.clientX,e.clientY)
+                }
+                
             }else{
                 menu.close()
             }
         }
     },
     mounted(){
-        // let home = this.$refs.home
-        // home.onmousedown = e =>{
-        //     e.preventDefault()
-        //     let mouseKey = e.button
-        //     let menu = this.$refs.contextMenu
-        //     switch(mouseKey){
-        //         case 0:
-        //             console.log('左键')
-        //             menu.close()
-        //             break;
-        //         case 1:
-        //             console.log('滚轮')
-        //             menu.close()
-        //             break;
-        //         case 2:
-        //             console.log('右键')
-        //             menu.open(e.clientX,e.clientY)
-        //             break;
-        //         default:
-
-        //     }
-       // }
     }
 }
 </script>
@@ -62,6 +57,15 @@ export default {
     background: url('../../../../static/images/menu/bg3.jpg') no-repeat;
     background-size: 100% 100%;
     overflow: hidden;
-
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    .content{   
+        flex: 1;
+    }
+    .bottom{
+     
+        flex: 0 0 54px
+    }
 }
 </style>

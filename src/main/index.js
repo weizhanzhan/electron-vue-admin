@@ -20,9 +20,9 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     width: 1440,
     height: 900,
-    useContentSize: true,
-    frame: true,//有无边框
-    resizable: false,//禁止窗口缩放
+    //useContentSize: true,
+    //frame: true,//有无边框
+    resizable: true,//禁止窗口缩放
   })
 
   mainWindow.loadURL(winURL)

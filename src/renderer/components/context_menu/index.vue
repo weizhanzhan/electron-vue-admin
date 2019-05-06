@@ -3,12 +3,13 @@
         class="context-menu" 
         v-if="show"
         :style="[posisiton]"
-        @click="can"
+        @click="context"
+        @contextmenu="context"
         >
         <ul class="menu-list">
-            <li class="item">刷新</li>
-            <li class="item">新建</li>
-            <li class="item">设置</li>
+            <li class="item" @click="Do">刷新</li>
+            <li class="item" @click="Do">新建</li>
+            <li class="item" @click="Do">设置</li>
         </ul>
     </div>
 </template>
@@ -34,12 +35,16 @@ export default {
         close(){
             this.show = false
         },
+        Do(e){
+            e.preventDefault()
+            e.cancelBubble = true;
+            //this.close()
+        },
         setOption(x,y){
             this.posisiton.top = y+'px'
             this.posisiton.left = x+'px'
         },
-        can(e){
-            console.log(123)
+        context(e){
             e.preventDefault()
             e.cancelBubble = true;
         }
@@ -79,7 +84,7 @@ export default {
 .context-menu{
     background:rgba(255, 255, 255, 0.2);
     position: absolute;
-   
+    z-index: 1;
     border-radius: 4px;
     .menu-list{
         list-style: none;
