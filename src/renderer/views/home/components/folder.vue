@@ -28,7 +28,9 @@ export default {
         
         },
         dragend(e){
-             console.log('img',e.clientX,e.clientY)
+            console.log('img',e.clientX,e.clientY)
+            if(e.clientX<0||e.clientY<0||e.clientX>1440||e.clientY>900)
+                return
             this.left = e.clientX-50+'px'
             this.top = e.clientY-50+'px'
         }
@@ -41,7 +43,7 @@ export default {
     height: 100px;
     width:100px;
     display: inline-block;
-    background: #eeeeee;
+    background:rgba(255,255,255,0.2);
     position: absolute
  }
 </style>

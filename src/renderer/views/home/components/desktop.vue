@@ -1,6 +1,7 @@
 <template>
     <div class="desktop">
         <Folder/>
+        <Folder/>
     </div>
 </template>
 
