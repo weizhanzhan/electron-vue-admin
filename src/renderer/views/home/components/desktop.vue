@@ -1,8 +1,9 @@
 <template>
     <div class="desktop">
+        <Grid/>
         <!-- <Folder/>
         <Folder/> -->
-          <grid-layout
+          <!-- <grid-layout
            :layout="layout"
             :auto-size="false"
             :col-num="20"
@@ -31,6 +32,7 @@
             {{item.i}}
         </grid-item>
     </grid-layout>
+    {{layout}} -->
     </div>
 </template>
 
@@ -39,29 +41,31 @@ import Folder from './folder'
 import VueGridLayout from 'vue-grid-layout';
 var testLayout = [
 	    {"x":0,"y":0,"w":1,"h":1,"i":"0"},
-    {"x":0,"y":1,"w":1,"h":1,"i":"1"},
-    {"x":0,"y":2,"w":1,"h":1,"i":"2"},
-    {"x":0,"y":3,"w":1,"h":1,"i":"3"},
-    {"x":1,"y":0,"w":1,"h":1,"i":"4"},
-    {"x":1,"y":1,"w":1,"h":1,"i":"5"},
-    {"x":1,"y":2,"w":1,"h":1,"i":"6"},
-    {"x":1,"y":3,"w":1,"h":1,"i":"7"},
-    {"x":2,"y":0,"w":1,"h":1,"i":"8"},
-    {"x":2,"y":1,"w":1,"h":1,"i":"9"},
-    {"x":2,"y":2,"w":1,"h":1,"i":"10"},
-    {"x":2,"y":3,"w":1,"h":1,"i":"11"},
-    {"x":3,"y":0,"w":1,"h":1,"i":"12"},
-    {"x":3,"y":1,"w":1,"h":1,"i":"13"},
-    {"x":3,"y":2,"w":1,"h":1,"i":"14"},
-    {"x":3,"y":3,"w":1,"h":1,"i":"15"},
-    {"x":4,"y":0,"w":1,"h":1,"i":"16"},
-    {"x":4,"y":1,"w":1,"h":1,"i":"17"},
-    {"x":4,"y":2,"w":1,"h":1,"i":"18"},
-    {"x":4,"y":3,"w":1,"h":1,"i":"19"}
-	];
+        {"x":0,"y":1,"w":1,"h":1,"i":"1"},
+        {"x":0,"y":2,"w":1,"h":1,"i":"2"},
+        {"x":0,"y":3,"w":1,"h":1,"i":"3"},
+        {"x":1,"y":0,"w":1,"h":1,"i":"4"},
+        {"x":1,"y":1,"w":1,"h":1,"i":"5"},
+        {"x":1,"y":2,"w":1,"h":1,"i":"6"},
+        {"x":1,"y":3,"w":1,"h":1,"i":"7"},
+        {"x":2,"y":0,"w":1,"h":1,"i":"8"},
+        {"x":2,"y":1,"w":1,"h":1,"i":"9"},
+        {"x":2,"y":2,"w":1,"h":1,"i":"10"},
+        {"x":2,"y":3,"w":1,"h":1,"i":"11"},
+        {"x":3,"y":0,"w":1,"h":1,"i":"12"},
+        {"x":3,"y":1,"w":1,"h":1,"i":"13"},
+        {"x":3,"y":2,"w":1,"h":1,"i":"14"},
+        {"x":3,"y":3,"w":1,"h":1,"i":"15"},
+        {"x":4,"y":0,"w":1,"h":1,"i":"16"},
+        {"x":4,"y":1,"w":1,"h":1,"i":"17"},
+        {"x":4,"y":2,"w":1,"h":1,"i":"18"},
+        {"x":4,"y":3,"w":1,"h":1,"i":"19"}
+    ];
+    import Grid from './grid-folder.vue'
 export default {
     components:{ 
         Folder,
+        Grid,
         GridLayout: VueGridLayout.GridLayout,
         GridItem: VueGridLayout.GridItem
        
@@ -75,8 +79,8 @@ export default {
      },
      methods:{
          watchitem:function(item) {
-            console.log(item.y)
-        if(item.y>13 ||item.x>19){
+            console.log(item)
+        if(item.y>7 ||item.x>7){
             item.y=1
             item.x=1
         }
