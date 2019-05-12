@@ -12,14 +12,14 @@
                     'item',
                     item.empty?'empty-folder':'is-folder',
                     dragging&&item.key == dragging.key?'drag-self':''
-                ]" 
-               
+                ]"          
                 :key="item.key"  
                 draggable="true" 
                 @dragstart="dragstart($event,item)" 
                 @drag="drage($event,item)"
                 @dragend="dragend($event,item)" 
                 @dragenter="onDragenter($event,item)"
+                @contextmenu="contextmenu($event,item)"
             >
                 {{item.label}}
             </div>
@@ -29,76 +29,12 @@
 
 <script>
     export default {
+        props:{
+            items:Array
+        },
         data() {
             return {
                 layout:[],
-                items: [
-                    {
-                        key: 1,
-                        label: '1',
-                        empty: false
-                    },
-                    {
-                        key: 2,
-                        label: '2',
-                        empty: false
-                    },
-                    {
-                        key: 3,
-                        label: '3',
-                        empty: false
-                    },
-                    // {
-                    //     key: 4,
-                    //     label: '4',
-                    //     empty: false
-                    // },
-                    // {
-                    //     key: 5,
-                    //     label: '5',
-                    //     empty: false
-                    // },
-                    // {
-                    //     key: 6,
-                    //     label: '6',
-                    //     empty: false
-                    // },
-                    // {
-                    //     key: 7,
-                    //     label: '7',
-                    //     empty: false
-                    // },
-                    // {
-                    //     key: 8,
-                    //     label: '',
-                    //     empty: true
-                    // },
-                    // {
-                    //     key: 9,
-                    //     label: '',
-                    //     empty: true
-                    // },
-                    // {
-                    //     key: 10,
-                    //     label: '',
-                    //     empty: true
-                    // },
-                    // {
-                    //     key: 11,
-                    //     label: '',
-                    //     empty: true
-                    // },
-                    // {
-                    //     key: 12,
-                    //     label: '',
-                    //     empty: true
-                    // },
-                    // {
-                    //     key: 13,
-                    //     label: '',
-                    //     empty: true
-                    // },
-                ],
                 dragging: null,
                 enterDragging: null,
                 gridColumn:{
@@ -115,30 +51,21 @@
                 this.handleGridColumn()
                 this.handleFolder()
             },
-            handleFolder(){
+            handleFolder(){//把有的实例 渲染到模板中
                 this.items.forEach(item=>{
-                    let lay = this.layout.find(layoutItem => { return layoutItem.key ==item.key})
+                    let lay = this.findItem(item.key).item
                     lay.label = item.label
                     lay.empty = item.empty
                 })
             },
             handleGridColumn(){
-                console.log(123)
-                let grid ,height ,width ,cols ,rows, colums='',Rows=''
+                let grid ,height ,width ,cols ,rows
                 this.layout = []
                 grid = this.$refs.grid.$el
                 height = grid.clientHeight
                 width = grid.clientWidth
                 cols = parseInt(width/100)
                 rows = parseInt(height/100)
-               
-                for(var i=0;i<cols;i++){
-                    colums+= "100px "
-                }
-                
-                for(var i=0;i<rows;i++){
-                    Rows+= "100px "
-                }
                 for(var i=0;i<rows*cols;i++){
                     this.layout.push({
                         key:i,
@@ -146,12 +73,10 @@
                         empty:true
                     })
                 }
-                console.log(colums)
-                this.gridColumn.gridTemplateColumns=colums
-                this.gridColumn.gridTemplateRows=Rows
+                this.gridColumn.gridTemplateColumns=`repeat(${cols}, 100px)`
+                this.gridColumn.gridTemplateRows=`repeat(${rows}, 100px)`
             },
             dragstart(e, item) {
-                console.log('start')
                 this.dragging = item
             },
             drage(e) {
@@ -166,6 +91,7 @@
 
                 newItems[start.index] = end.item
                 newItems[end.index] = start.item
+                this.$emit('exchange',start,end)
                 this.layout = [...newItems]
                 this.dragging = null
             },
@@ -182,6 +108,14 @@
                     index,
                     item: this.layout[index]
                 }
+            },
+            contextmenu(e,item){
+                this.$emit('contextmenu',item)
+                if(item.empty)
+                    return
+                e.preventDefault()
+                e.cancelBubble = true;
+              
             }
         }
     }

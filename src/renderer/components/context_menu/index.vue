@@ -7,9 +7,15 @@
         @contextmenu="context"
         >
         <ul class="menu-list">
-            <li class="item" @click="Do">刷新</li>
-            <li class="item" @click="Do">新建</li>
-            <li class="item" @click="Do">设置</li>
+            <template v-for="list in lists">
+                 <li 
+                    class="item" 
+                    @click="Do($event,list)"
+                    :key="list.key"
+                    
+                >{{list.label}}</li>
+            </template>
+           
         </ul>
     </div>
 </template>
@@ -17,6 +23,9 @@
 <script>
 export default {
     name:'contextName',
+    props:{
+        lists:Array
+    },
     data () {
         return {
             show:false,
@@ -35,9 +44,10 @@ export default {
         close(){
             this.show = false
         },
-        Do(e){
+        Do(e,item){
             e.preventDefault()
             e.cancelBubble = true;
+            this.$emit('operation',item)
             //this.close()
         },
         setOption(x,y){

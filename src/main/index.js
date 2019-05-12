@@ -1,5 +1,8 @@
 import { app, BrowserWindow } from 'electron'
 
+//加这一句的原因： 默认的vuex 是用了这个createSharedMutations插件的
+//如果 要正常使用vuex 那么就在朱进程引入一下这个store实例，或者注释掉那个插件也行
+import '../renderer/store'
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
