@@ -15,5 +15,6 @@
   html { 
     overflow-x: hidden;
     overflow-y: auto; 
+    font-family: 'Poppins', sans-serif;
   }
 </style>

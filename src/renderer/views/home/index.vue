@@ -10,7 +10,7 @@
             <Desktop/>
         </div>
         <div class="bottom">
-            <BottomBar/>
+            <!-- <BottomBar/> -->
         </div>
     </div>
 </template>

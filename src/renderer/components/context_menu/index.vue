@@ -92,8 +92,11 @@ export default {
 
 <style lang="scss" scoped>
 .context-menu{
-    background:rgba(255, 255, 255, 0.2);
+    background:rgba(255, 255, 255, 0.9);
+    color: black;
+    font-family: sans-serif;
     position: absolute;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 2pt 6pt;
     z-index: 1;
     border-radius: 4px;
     .menu-list{
@@ -105,7 +108,8 @@ export default {
             width: 100px;
         }
         .item:hover{
-            background: rgba(255, 255, 255, 0.1)
+            background-color: rgba(127, 127, 127, 0.75);
+            color: rgb(255, 255, 255);
         }
     }
 }

@@ -37,9 +37,12 @@ export default {
          }
      },
      watch:{
-        items(val,oldVal){
-            console.log(val,oldVal)
-            this.$refs.grid.init()
+        items:{
+            handler(val){
+                
+                this.$refs.grid.init()
+            },
+            deep:true
         }
      },
      methods:{
@@ -88,7 +91,7 @@ export default {
             }
         },
         exchange(start,end){
-            console.log(start,end)
+          
             this.$store.dispatch('refreshFolder',{
                 start,end
             })

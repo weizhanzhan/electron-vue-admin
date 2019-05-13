@@ -20,25 +20,48 @@ const state = {
   
 const mutations = {
     ADD_FOLDER(state,data){
-        if(data){
-            let newData = {...data}
-            newData.empty = false
-            newData.label = newData.key
-            state.Folders.push(newData)
+
+        if(data){     
+            let item = state.Folders.find(folder =>{
+                return folder.key == data.key
+            })
+            if(item){
+                item.empty = false
+                item.label = 'new Folder'
+            }else{
+                let newData = {...data}
+                newData.empty = false
+                newData.label = 'new Folder'
+                state.Folders.push(newData)
+            }      
         }  
     },
     REFRESH_FOLDER(state,folders){
-        // let start = state.Folders.find(folder =>{
-        //     return folder.key == folders.start.item.key
-        // })
-        // start.key = folders.end.item.key
-
-        // let end = state.Folders.find(folder =>{
-        //     return folder.key == folders.end.item.key
-        // })
-        // end = folders.start.item
+        let start,end
+        start = state.Folders.find(folder =>{
+            return folder.key == folders.start.item.key
+        })
+        end = state.Folders.find(folder =>{
+            return folder.key == folders.end.item.key
+        })
+     
+        start.key = folders.end.item.key
+     
+        if(end){//start 和end 都存在 表示两者互换
+            if(end.empty){//当被替换的是个空的格子
+                end.key = folders.start.item.key
+            }else{//当被替换的是个存在的folder
+                end.key = folders.start.item.key
+                end.empty = folders.start.item.empty
+            }
+        }else{//被替换者 在vuex中不存在的时候
+            let enditem  = {...folders.end.item}
+            enditem.key = folders.start.item.key
+            state.Folders.push(enditem)
+        }
       
-       // console.log(start)
+        
+       
     }
 }
 

@@ -83,16 +83,19 @@
 
             },
             dragend(e, item) {
+             
                 if(this.dragging.empty)
                     return
                 let newItems = [...this.layout]
                 let start = this.findItem(this.dragging.key)
                 let end = this.findItem(this.enterDragging.key)
-
+                console.log(start,end)
                 newItems[start.index] = end.item
                 newItems[end.index] = start.item
                 this.$emit('exchange',start,end)
+               
                 this.layout = [...newItems]
+                 console.log(this.layout)
                 this.dragging = null
             },
             onDragenter(e, item) {
